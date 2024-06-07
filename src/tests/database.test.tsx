@@ -1,14 +1,14 @@
 import { describe, it, expect } from "vitest";
 import {
-  addSettlement,
-  getSettlements,
-  updateSettlement,
+  addSettlementDB,
+  getSettlementsDB,
+  updateSettlementDB,
   getSettlementById,
 } from "../database/database";
 
 describe("Database Tests", () => {
   it("should add a new settlement", () => {
-    const newSettlement = addSettlement({
+    const newSettlement = addSettlementDB({
       partyAAmount: 1000,
       partyBResponse: "none",
     });
@@ -17,15 +17,15 @@ describe("Database Tests", () => {
       partyAAmount: 1000,
       partyBResponse: "none",
     });
-    expect(getSettlements()).toHaveLength(1);
+    expect(getSettlementsDB()).toHaveLength(1);
   });
 
   it("should update a settlement", () => {
-    const newSettlement = addSettlement({
+    const newSettlement = addSettlementDB({
       partyAAmount: 2000,
       partyBResponse: "none",
     });
-    const updatedSettlement = updateSettlement(newSettlement.id, {
+    const updatedSettlement = updateSettlementDB(newSettlement.id, {
       partyAAmount: 2500,
     });
     expect(updatedSettlement).toEqual({
@@ -36,7 +36,7 @@ describe("Database Tests", () => {
   });
 
   it("should get a settlement by ID", () => {
-    const newSettlement = addSettlement({
+    const newSettlement = addSettlementDB({
       partyAAmount: 3000,
       partyBResponse: "none",
     });
@@ -49,7 +49,7 @@ describe("Database Tests", () => {
   });
 
   it("should return null for non-existing ID on update", () => {
-    const result = updateSettlement(999, { partyAAmount: 4000 });
+    const result = updateSettlementDB(999, { partyAAmount: 4000 });
     expect(result).toBeNull();
   });
 

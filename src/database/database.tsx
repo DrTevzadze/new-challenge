@@ -1,4 +1,4 @@
-// console.log has been added to each function, in order to track the database
+// console.log has been added to each function, in order to track the data passed to the database
 
 interface Settlement {
   id: number;
@@ -8,12 +8,12 @@ interface Settlement {
 
 const settlements: Settlement[] = [];
 
-const getSettlements = (): Settlement[] => {
+const getSettlementsDB = (): Settlement[] => {
   console.log(settlements);
   return settlements;
 };
 
-const addSettlement = (settlement: {
+const addSettlementDB = (settlement: {
   partyAAmount: number;
   partyBResponse: "none" | "agreed" | "disputed";
 }): Settlement => {
@@ -26,7 +26,7 @@ const addSettlement = (settlement: {
   return newSettlement;
 };
 
-const updateSettlement = (
+const updateSettlementDB = (
   id: number,
   update: {
     partyAAmount?: number;
@@ -45,4 +45,9 @@ const getSettlementById = (id: number): Settlement | undefined => {
   return settlements.find((settlement) => settlement.id === id);
 };
 
-export { getSettlements, addSettlement, updateSettlement, getSettlementById };
+export {
+  getSettlementsDB,
+  addSettlementDB,
+  updateSettlementDB,
+  getSettlementById,
+};
