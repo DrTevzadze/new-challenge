@@ -1,10 +1,10 @@
 interface ButtonProps {
   type?: "submit" | "button";
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   name: string;
 }
 
-function Button({ type, onClick, name }: ButtonProps) {
+function Button({ type = "button", onClick, name }: ButtonProps) {
   return (
     <div>
       <button
