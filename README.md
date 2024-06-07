@@ -15,10 +15,9 @@ This project is a Settlement Application that allows Party A and Party B to nego
 - TypeScript
 - Redux Toolkit
 - React Router
-- Axios (for potential API requests)
 - Classnames (for conditionally applying CSS classes)
 - Tailwind CSS
-- uuid (for unique IDs)
+- Vitest (for testing purposes)
 
 ## Getting Started
 
