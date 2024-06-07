@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import settlementReducer from "./slices/settlementSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    settlement: settlementReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
