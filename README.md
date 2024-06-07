@@ -27,8 +27,8 @@ This project is a Settlement Application that allows Party A and Party B to nego
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/DrTevzadze/challenge.git
-   cd challenge
+   git clone https://github.com/DrTevzadze/new-challenge.git
+   cd new-challenge
 
    ```
 
