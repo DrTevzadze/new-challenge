@@ -1,45 +1,51 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// features/settlement/settlementSlice.ts
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface Form {
+  id: string;
+  title: string;
+  amount: number;
+  comment: string;
+  status: 'pending' | 'complete' | 'updated';
+}
 
 interface SettlementState {
-  amount: number;
-  status: "submitted" | "agreed" | "disputed" | null;
-  partyBResponse: "agreed" | "disputed" | null;
+  forms: Form[];
 }
 
 const initialState: SettlementState = {
-  amount: 0,
-  status: null,
-  partyBResponse: null,
+  forms: [],
 };
 
 const settlementSlice = createSlice({
-  name: "settlement",
+  name: 'settlement',
   initialState,
   reducers: {
-    submitSettlement: (state, action: PayloadAction<number>) => {
-      state.amount = action.payload;
-      state.status = "submitted";
-      state.partyBResponse = null;
-      sessionStorage.setItem("settlement", JSON.stringify(state));
+    submitForm: (state, action: PayloadAction<Form>) => {
+      state.forms.push(action.payload);
+      sessionStorage.setItem('forms', JSON.stringify(state.forms));
     },
-    respondSettlement: (
-      state,
-      action: PayloadAction<"agreed" | "disputed">
-    ) => {
-      state.status = action.payload;
-      state.partyBResponse = action.payload;
-      sessionStorage.setItem("settlement", JSON.stringify(state));
-    },
-    loadSettlement: (state) => {
-      const storedSettlement = sessionStorage.getItem("settlement");
-      if (storedSettlement) {
-        return JSON.parse(storedSettlement);
+    updateForm: (state, action: PayloadAction<{ id: string; status: Form['status']; amount?: number; comment?: string }>) => {
+      const form = state.forms.find((form) => form.id === action.payload.id);
+      if (form) {
+        form.status = action.payload.status;
+        if (action.payload.amount !== undefined) {
+          form.amount = action.payload.amount;
+        }
+        if (action.payload.comment) {
+          form.comment = action.payload.comment;
+        }
       }
-      return state;
+      sessionStorage.setItem('forms', JSON.stringify(state.forms));
+    },
+    loadForms: (state) => {
+      const storedForms = sessionStorage.getItem('forms');
+      if (storedForms) {
+        state.forms = JSON.parse(storedForms);
+      }
     },
   },
 });
 
-export const { submitSettlement, respondSettlement, loadSettlement } =
-  settlementSlice.actions;
+export const { submitForm, updateForm, loadForms } = settlementSlice.actions;
 export default settlementSlice.reducer;

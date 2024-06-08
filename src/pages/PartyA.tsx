@@ -1,6 +1,8 @@
 // components/PartyA.tsx
+import React from 'react';
+import FormSection from '../components/FormSection';
 
-function PartyA() {
+const PartyA: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-orange-200 to-orange-400 flex flex-col items-center justify-center">
       <header className="text-center bg-white shadow-md p-4 rounded-md mb-4">
@@ -8,8 +10,9 @@ function PartyA() {
           Party A
         </h1>
       </header>
+      <FormSection isPartyA={true} />
     </div>
   );
-}
+};
 
 export default PartyA;
