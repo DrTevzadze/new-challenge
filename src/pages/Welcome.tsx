@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 
 function Welcome() {
   const navigate = useNavigate();
@@ -27,28 +28,30 @@ function Welcome() {
   }, [navigate]);
 
   return (
-    <div
-      className={`flex flex-col items-center justify-center h-screen bg-blue-500 transition-opacity duration-1000 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      <div className="flex flex-col items-center">
-        <h1
-          className={`text-5xl text-white mb-4  transition-all duration-1000 transform animate-pulse ${
-            show ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-full"
-          }`}
-        >
-          Welcome to Settlement Demo App!
-        </h1>
-        <h2
-          className={`text-3xl text-white mb-4  transition-all duration-1000 transform animate-pulse ${
-            show ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
-          }`}
-        >
-          I hope you will enjoy the final result.
-        </h2>
+    <Layout>
+      <div
+        className={`flex flex-col items-center justify-center h-screen transition-opacity duration-1000 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <div className="flex flex-col items-center">
+          <h1
+            className={`text-5xl text-white mb-4 transition-all duration-1000 transform animate-pulse ${
+              show ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-full"
+            }`}
+          >
+            Welcome to Settlement Demo App!
+          </h1>
+          <h2
+            className={`text-3xl text-white mb-4 transition-all duration-1000 transform animate-pulse ${
+              show ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
+            }`}
+          >
+            I hope you will enjoy the final result.
+          </h2>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
 
