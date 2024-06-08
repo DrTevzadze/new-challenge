@@ -1,14 +1,24 @@
 // components/PartyB.tsx
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadForms } from "../slices/settlementSlice";
-import FormSection from "../components/FormSection";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadForms } from '../slices/settlementSlice';
+import FormSection from '../components/FormSection';
 
 const PartyB: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadForms());
+
+    const handleStorageChange = () => {
+      dispatch(loadForms());
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, [dispatch]);
 
   return (

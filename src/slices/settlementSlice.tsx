@@ -1,7 +1,7 @@
 // features/settlement/settlementSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Form {
+export interface Form {
   id: string;
   title: string;
   amount: number;

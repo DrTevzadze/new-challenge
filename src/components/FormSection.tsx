@@ -1,30 +1,32 @@
 // components/FormSection.tsx
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
-import { submitForm, loadForms } from "../slices/settlementSlice";
-import { RootState } from "../store";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { submitForm, Form } from '../slices/settlementSlice';
+import { RootState } from '../store';
 
 interface FormSectionProps {
   isPartyA: boolean;
 }
 
 const FormSection: React.FC<FormSectionProps> = ({ isPartyA }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [amount, setAmount] = useState<number>(0);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const forms = useSelector((state: RootState) => state.settlement.forms);
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    const newForm = {
+    const newForm: Form = {
       id: uuidv4(),
       title,
       amount,
       comment,
-      status: "pending",
+      status: 'pending',
     };
     dispatch(submitForm(newForm));
+    // Trigger the storage event by using localStorage
+    localStorage.setItem('trigger', new Date().toISOString());
   };
 
   return (
@@ -52,10 +54,7 @@ const FormSection: React.FC<FormSectionProps> = ({ isPartyA }) => {
             onChange={(e) => setComment(e.target.value)}
             className="border p-2 mb-2 w-full"
           />
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-          >
+          <button onClick={handleSubmit} className="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
             Submit
           </button>
         </div>
